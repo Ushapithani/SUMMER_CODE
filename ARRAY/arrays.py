@@ -1,4 +1,4 @@
-# 1. Smallest Element in Array using if else
+# 1. Smallest Element in Array 
 
 n = int(input())
 arr = list(map(int, input().split()))
@@ -154,7 +154,7 @@ for key in freq:
 
 
 
-# 10. Find Non-Repeating Elements
+# 10. Find Non Repeating Elements
 
 n = int(input())
 arr = list(map(int, input().split()))
