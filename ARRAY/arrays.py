@@ -321,5 +321,50 @@ for i in range(n):
 
 
 
+# 19 pair sum 
+n = int(input())
+arr = list(map(int, input().split()))
+target = int(input())
+
+seen = set()
+found = False
+
+for x in arr:
+    if target - x in seen:
+        print(target - x, x)
+        found = True
+        break
+    seen.add(x)
+
+if not found:
+    print(-1)
 
 
+# 20 union and inrersection
+n1 = int(input())
+a = list(map(int, input().split()))
+n2 = int(input())
+b = list(map(int, input().split()))
+
+setA = set(a)
+setB = set(b)
+
+union = sorted(setA | setB)
+intersection = sorted(setA & setB)
+
+print("Union:", *union)
+print("Intersection:", *intersection)
+
+
+# 21 maximum subarray 
+n = int(input())
+arr = list(map(int, input().split()))
+
+max_sum = arr[0]
+curr_sum = arr[0]
+
+for i in range(1, n):
+    curr_sum = max(arr[i], curr_sum + arr[i])
+    max_sum = max(max_sum, curr_sum)
+
+print(max_sum)
