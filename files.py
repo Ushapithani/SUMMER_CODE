@@ -1,0 +1,7 @@
+f = open("sample.txt", "w")
+f.write("Hello, this is a sample file.\n")
+f.write("This file is used for demonstrating file handling in Python.\n")
+f.close()
+f = open("sample.txt", "r")
+print(f.read())
+f.close()
