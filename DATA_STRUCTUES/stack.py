@@ -131,3 +131,63 @@ print("Popped element:", stack.pop())
 print("Stack:", stack.stack)              
 print("stack is empty:", stack.is_empty())                   
 print("stack is overflow:", stack.is_overflow())                
+
+
+# create a menu driven program to perform stack operations 
+# create a class with the name of stack and implement push, pop, peek, is_empty and is_overflow method
+class Stack:
+    def __init__(self, max_size):
+        self.stack = []
+        self.max_size = max_size
+
+    def push(self, item):
+        if len(self.stack) < self.max_size:
+            self.stack.append(item)
+        else:
+            print("Stack overflow")
+
+    def pop(self):
+        if not self.is_empty():
+            return self.stack.pop()
+        else:
+            print("Stack underflow")
+
+    def peek(self):
+        if not self.is_empty():
+            return self.stack[-1]
+        else:
+            print("Stack is empty")
+
+    def is_empty(self):
+        return len(self.stack) == 0
+
+    def is_overflow(self):
+        return len(self.stack) >= self.max_size
+def menu():
+    print("1. Push")
+    print("2. Pop")
+    print("3. Peek")
+    print("4. Check if stack is empty")
+    print("5. Check if stack is overflow")
+    print("6. Exit")
+    return int(input("Enter your choice: "))
+stack = Stack(5)
+while True:
+    choice = menu()
+    if choice == 1:
+        item = int(input("Enter item to push: "))
+        stack.push(item)
+    elif choice == 2:
+        print("Popped element:", stack.pop())
+    elif choice == 3:
+        print("Top element:", stack.peek())
+    elif choice == 4:
+        print("Stack is empty:", stack.is_empty())
+    elif choice == 5:
+        print("Stack is overflow:", stack.is_overflow())
+    elif choice == 6:
+        break
+    else:
+        print("Invalid choice. Please try again.")
+
+
