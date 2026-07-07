@@ -51,7 +51,8 @@ print("Rear customer token number:", railway.rear())
 print("Number of customers in the queue:", railway.size())'''
 
 
-play=[]
+
+'''play=[]
 n=int(input(" enter the number of songs"))
 for  i in range(n):
     song =input("enter the songs:  ").split()
@@ -61,4 +62,24 @@ for  i in range(n):
         a=play.pop(0)
         print("pop song:",a)
         play.append(a)
-print(play)
+print(play)'''
+
+'''hospital management-priority queue'''
+n=int(input())
+h=[]
+for i in range(n):
+    patient=input().upper().split()
+    if patient[0]=="ADD":
+        h.append(int(patient[2]))
+        h.sort()
+    if patient==["TREAT"]:
+        print("Now treating:",h[0])
+    if patient==["NEXT"]:
+        s=h.pop(0)
+        h.append(s)
+print("next patient:",h[0])
+
+
+
+
+
