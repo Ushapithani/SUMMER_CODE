@@ -1,169 +1,481 @@
-def productExceptSelf(nums):
-    n = len(nums)
 
-    result = [1] * n
+# 1. Find Smallest Element
+arr = [5, 2, 8, 1, 9]
 
-    prefix = 1
-    for i in range(n):
-        result[i] = prefix
-        prefix *= nums[i]
+smallest = arr[0]
 
-    suffix = 1
-    for i in range(n-1, -1, -1):
-        result[i] *= suffix
-        suffix *= nums[i]
+for num in arr:
+    if num < smallest:
+        smallest = num
 
-    return result
+print("Smallest:", smallest)
 
-nums = [1,2,3,4]
+# Output:
+# Smallest: 1
 
-print(productExceptSelf(nums))
 
+# 2. Find Largest Element
+arr = [5, 2, 8, 1, 9]
 
+largest = arr[0]
 
-def twoSum(nums, target):
+for num in arr:
+    if num > largest:
+        largest = num
 
-    for i in range(len(nums)):
+print("Largest:", largest)
 
-        for j in range(i + 1, len(nums)):
+# Output:
+# Largest: 9
 
-            if nums[i] + nums[j] == target:
-                return [i, j]
 
-nums = [2,7,11,15]
-target = 9
+# 3. Find Second Smallest and Second Largest (If-Else)
+arr = [5, 2, 8, 1, 9]
 
-print(twoSum(nums, target))
+smallest = arr[0]
+second_smallest = arr[0]
 
+largest = arr[0]
+second_largest = arr[0]
 
+for num in arr:
 
-def findMedian(nums1, nums2):
+    if num < smallest:
+        second_smallest = smallest
+        smallest = num
 
-    arr = nums1 + nums2
-    arr.sort()
+    elif (num < second_smallest or second_smallest == smallest) and num != smallest:
+        second_smallest = num
 
-    n = len(arr)
+    if num > largest:
+        second_largest = largest
+        largest = num
 
-    if n % 2 == 0:
-        return (arr[n//2] + arr[n//2 - 1]) / 2
+    elif (num > second_largest or second_largest == largest) and num != largest:
+        second_largest = num
 
-    return arr[n//2]
+print("Second Smallest:", second_smallest)
+print("Second Largest:", second_largest)
 
-nums1 = [1,3]
-nums2 = [2]
+# Output:
+# Second Smallest: 2
+# Second Largest: 8
 
-print(findMedian(nums1, nums2))
 
+# 4. Find Second Smallest and Second Largest (Sorting)
+arr = [5, 2, 8, 1, 9]
 
+arr = sorted(set(arr))
 
+print("Second Smallest:", arr[1])
+print("Second Largest:", arr[-2])
 
-def search(nums, target):
+# Output:
+# Second Smallest: 2
+# Second Largest: 8
 
-    for i in range(len(nums)):
 
-        if nums[i] == target:
-            return i
+# 5. Reverse an Array
+arr = [1, 2, 3, 4, 5]
 
-    return -1
+left = 0
+right = len(arr) - 1
 
-nums = [4,5,6,7,0,1,2]
-target = 0
+while left < right:
+    arr[left], arr[right] = arr[right], arr[left]
+    left += 1
+    right -= 1
 
-print(search(nums, target))
+print("Reversed:", arr)
 
+# Output:
+# Reversed: [5, 4, 3, 2, 1]
 
 
-def maxProfit(prices):
+# 6. Count Frequency of Each Element
+arr = [1, 2, 2, 3, 1, 4, 2]
 
-    min_price = prices[0]
-    max_profit = 0
+freq = {}
 
-    for price in prices:
+for num in arr:
+    if num in freq:
+        freq[num] += 1
+    else:
+        freq[num] = 1
 
-        if price < min_price:
-            min_price = price
+print(freq)
 
-        profit = price - min_price
+# Output:
+# {1: 2, 2: 3, 3: 1, 4: 1}
 
-        if profit > max_profit:
-            max_profit = profit
 
-    return max_profit
+# 7. Rearrange Array in Increasing-Decreasing Order
+arr = [8, 7, 1, 6, 5, 9]
 
-prices = [7,1,5,3,6,4]
+arr.sort()
 
-print(maxProfit(prices))
+mid = (len(arr) + 1) // 2
 
+arr = arr[:mid] + arr[mid:][::-1]
 
-def trap(height):
+print(arr)
 
-    n = len(height)
+# Output:
+# [1, 5, 6, 9, 8, 7]
 
-    left = [0] * n
-    right = [0] * n
 
-    left[0] = height[0]
+# 8. Sum of Elements
+arr = [1, 2, 3, 4, 5]
 
-    for i in range(1, n):
-        left[i] = max(left[i-1], height[i])
+total = 0
 
-    right[n-1] = height[n-1]
+for num in arr:
+    total += num
 
-    for i in range(n-2, -1, -1):
-        right[i] = max(right[i+1], height[i])
+print("Sum:", total)
 
-    water = 0
+# Output:
+# Sum: 15
 
-    for i in range(n):
-        water += min(left[i], right[i]) - height[i]
 
-    return water
+# 9. Left Rotate by K Elements
+arr = [1, 2, 3, 4, 5]
 
-height = [0,1,0,2,1,0,1,3,2,1,2,1]
+k = 2
 
-print(trap(height))
+k %= len(arr)
 
+arr = arr[k:] + arr[:k]
 
+print(arr)
 
-def threeSum(nums):
+# Output:
+# [3, 4, 5, 1, 2]
 
-    nums.sort()
 
-    result = []
+# 10. Average of Elements
+arr = [10, 20, 30, 40]
 
-    for i in range(len(nums)):
+total = 0
 
-        if i > 0 and nums[i] == nums[i-1]:
-            continue
+for num in arr:
+    total += num
 
-        left = i + 1
-        right = len(nums) - 1
+print("Average:", total / len(arr))
 
-        while left < right:
+# Output:
+# Average: 25.0
 
-            total = nums[i] + nums[left] + nums[right]
+# ============================
+# ARRAY PROGRAMS (11 - 20)
+# ============================
 
-            if total == 0:
+# 11. Median of Array
+arr = [5, 2, 1, 4, 3]
 
-                result.append([nums[i], nums[left], nums[right]])
+arr.sort()
 
-                while left < right and nums[left] == nums[left + 1]:
-                    left += 1
+n = len(arr)
 
-                while left < right and nums[right] == nums[right - 1]:
-                    right -= 1
+if n % 2 == 1:
+    print("Median:", arr[n // 2])
+else:
+    print("Median:", (arr[n // 2] + arr[n // 2 - 1]) / 2)
 
-                left += 1
-                right -= 1
-US
-            elif total < 0:
-                left += 1
+# Output:
+# Median: 3
 
-            else:
-                right -= 1
 
-    return result
+# 12. Remove Duplicates (Sorted Array)
+arr = [1, 1, 2, 2, 3, 4, 4]
 
-nums = [-1,0,1,2,-1,-4]
+result = [arr[0]]
 
-print(threeSum(nums))
+for i in range(1, len(arr)):
+    if arr[i] != arr[i - 1]:
+        result.append(arr[i])
+
+print(result)
+
+# Output:
+# [1, 2, 3, 4]
+
+
+# 13. Remove Duplicates (Unsorted Array)
+arr = [3, 1, 2, 3, 4, 2, 5]
+
+result = []
+
+for num in arr:
+    if num not in result:
+        result.append(num)
+
+print(result)
+
+# Output:
+# [3, 1, 2, 4, 5]
+
+
+# 14. Find Repeating Elements
+arr = [1, 2, 3, 2, 4, 5, 1]
+
+seen = set()
+repeating = []
+
+for num in arr:
+    if num in seen and num not in repeating:
+        repeating.append(num)
+    else:
+        seen.add(num)
+
+print("Repeating:", repeating)
+
+# Output:
+# Repeating: [2, 1]
+
+
+# 15. Find Non-Repeating Elements
+arr = [1, 2, 3, 2, 1, 5]
+
+freq = {}
+
+for num in arr:
+    if num in freq:
+        freq[num] += 1
+    else:
+        freq[num] = 1
+
+for num in arr:
+    if freq[num] == 1:
+        print("Non-Repeating:", num)
+
+# Output:
+# Non-Repeating: 3
+# Non-Repeating: 5
+
+
+# 16. Find Symmetric Pairs
+
+'''
+What are Symmetric Pairs?
+
+Two pairs are symmetric if one pair is the reverse of the other.
+
+If you have:
+
+(a, b)
+
+then its symmetric pair is:
+
+(b, a)'''
+pairs = [(1,2), (3,4), (5,9), (2,1), (9,5)]
+
+visited = set()
+
+for a, b in pairs:
+    if (b, a) in visited:
+        print((a, b), (b, a))
+    visited.add((a, b))
+
+# Output:
+# (2, 1) (1, 2)
+# (9, 5) (5, 9)
+
+
+# 17. Maximum Product Subarray
+arr = [2, 3, -2, 4]
+
+max_product = arr[0]
+min_product = arr[0]
+answer = arr[0]
+
+for i in range(1, len(arr)):
+
+    if arr[i] < 0:
+        max_product, min_product = min_product, max_product
+
+    max_product = max(arr[i], max_product * arr[i])
+    min_product = min(arr[i], min_product * arr[i])
+
+    answer = max(answer, max_product)
+
+print("Maximum Product:", answer)
+
+# Output:
+# Maximum Product: 6
+
+
+# 18. Replace Each Element by Rank
+arr = [20, 15, 26, 2, 98]
+
+sorted_arr = sorted(set(arr))
+
+rank = {}
+
+for i in range(len(sorted_arr)):
+    rank[sorted_arr[i]] = i + 1
+
+result = []
+
+for num in arr:
+    result.append(rank[num])
+
+print(result)
+
+# Output:
+# [3, 2, 4, 1, 5]
+
+
+# 19. Sort Array by Frequency
+arr = [2,3,2,4,5,12,2,3,3,3]
+
+freq = {}
+
+for num in arr:
+    if num in freq:
+        freq[num] += 1
+    else:
+        freq[num] = 1
+
+arr.sort(key=lambda x: (-freq[x], x))
+
+print(arr)
+
+# Output:
+# [3, 3, 3, 3, 2, 2, 2, 4, 5, 12]
+
+
+# 20. Right Rotate by K Elements
+arr = [1,2,3,4,5]
+
+k = 2
+
+k %= len(arr)
+
+arr = arr[-k:] + arr[:-k]
+
+print(arr)
+
+# Output:
+# [4, 5, 1, 2, 3]
+
+
+# 21. Finding Equilibrium Index
+arr = [-7, 1, 5, 2, -4, 3, 0]
+
+total = sum(arr)
+left_sum = 0
+
+for i in range(len(arr)):
+
+    total -= arr[i]
+
+    if left_sum == total:
+        print("Equilibrium Index:", i)
+
+    left_sum += arr[i]
+
+# Output:
+# Equilibrium Index: 3
+
+
+# 22. Circular Rotation by K Positions
+arr = [1, 2, 3, 4, 5]
+
+k = 3
+
+k %= len(arr)
+
+arr = arr[-k:] + arr[:-k]
+
+print(arr)
+
+# Output:
+# [3, 4, 5, 1, 2]
+
+
+# 23. Sort an Array According to Another Array
+arr1 = [2,1,2,5,7,1,9,3,6,8,8]
+arr2 = [2,1,8,3]
+
+result = []
+
+for num in arr2:
+    while num in arr1:
+        result.append(num)
+        arr1.remove(num)
+
+arr1.sort()
+
+result.extend(arr1)
+
+print(result)
+
+# Output:
+# [2, 2, 1, 1, 8, 8, 3, 5, 6, 7, 9]
+
+
+# 24. Linear Search
+arr = [10,20,30,40,50]
+
+target = 30
+
+found = False
+
+for i in range(len(arr)):
+    if arr[i] == target:
+        print("Found at Index:", i)
+        found = True
+        break
+
+if not found:
+    print("Not Found")
+
+# Output:
+# Found at Index: 2
+
+
+# 25. Binary Search
+arr = [10,20,30,40,50]
+
+target = 40
+
+left = 0
+right = len(arr) - 1
+
+while left <= right:
+
+    mid = (left + right) // 2
+
+    if arr[mid] == target:
+        print("Found at Index:", mid)
+        break
+
+    elif arr[mid] < target:
+        left = mid + 1
+
+    else:
+        right = mid - 1
+
+# Output:
+# Found at Index: 3
+
+
+# 26. Check if One Array is a Subset of Another
+arr1 = [11,1,13,21,3,7]
+arr2 = [11,3,7,1]
+
+flag = True
+
+for num in arr2:
+    if num not in arr1:
+        flag = False
+        break
+
+if flag:
+    print("Subset")
+else:
+    print("Not a Subset")
+
+# Output:
+# Subset
